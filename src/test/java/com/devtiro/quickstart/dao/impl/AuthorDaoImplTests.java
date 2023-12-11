@@ -1,5 +1,6 @@
-package com.devtiro.quickstart.dao;
+package com.devtiro.quickstart.dao.impl;
 
+import com.devtiro.quickstart.TestDataUtil;
 import com.devtiro.quickstart.dao.impl.AuthorDaoImpl;
 import com.devtiro.quickstart.domain.Author;
 import org.junit.jupiter.api.Test;
@@ -25,11 +26,7 @@ public class AuthorDaoImplTests {
 
     @Test
     public void testThatCreateAuthorGeneratesCorrectSql() {
-        Author author = Author.builder()
-                .id(1L)
-                .name("Jordan Smith")
-                .age(40)
-                .build();
+        Author author = TestDataUtil.createTestAuthor();
 
         underTest.create(author);
 
