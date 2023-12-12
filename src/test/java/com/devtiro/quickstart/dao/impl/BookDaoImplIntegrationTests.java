@@ -14,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -80,5 +81,20 @@ public class BookDaoImplIntegrationTests {
         assertThat(result).isPresent();
         assertThat(result.get()).isEqualTo(bookA);
 
+    }
+
+    @Test
+    public void testThatBookCanBeDeleted() {
+        Author authorA = TestDataUtil.createTestAuthorA();
+        authorDao.create(authorA);
+
+        Book bookA = TestDataUtil.createTestBookA();
+        bookA.setAuthorId(authorA.getId());
+        underTest.create(bookA);
+
+        underTest.delete(bookA.getIsbn());
+
+        Optional<Book> result = underTest.findOne(bookA.getIsbn());
+        assertThat(result).isEmpty();
     }
 }
