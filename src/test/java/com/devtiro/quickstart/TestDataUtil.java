@@ -1,5 +1,7 @@
 package com.devtiro.quickstart;
 
+import com.devtiro.quickstart.domain.dto.AuthorDto;
+import com.devtiro.quickstart.domain.dto.BookDto;
 import com.devtiro.quickstart.domain.entities.Author;
 import com.devtiro.quickstart.domain.entities.Book;
 
@@ -39,6 +41,14 @@ public final class TestDataUtil {
                 .author(author)
                 .build();
     }
+
+//    public static BookDto createTestBooDtoA(final AuthorDto author) {
+//        return Book.builder()
+//                .isbn("978-1-2345-6789-0")
+//                .title("The Shadow in the Attic")
+//                .author(author)
+//                .build();
+//    }
 
     public static Book createTestBookB(Author author) {
         return Book.builder()
