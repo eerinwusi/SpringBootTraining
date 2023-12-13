@@ -4,6 +4,8 @@ import com.devtiro.quickstart.domain.dto.AuthorDto;
 import com.devtiro.quickstart.domain.entities.Author;
 import com.devtiro.quickstart.mappers.Mapper;
 import com.devtiro.quickstart.services.AuthorService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +23,9 @@ public class AuthorController {
     }
 
     @PostMapping(path = "/authors")
-    public AuthorDto createAuthor(@RequestBody AuthorDto authorDto) {
+    public ResponseEntity<AuthorDto> createAuthor(@RequestBody AuthorDto authorDto) {
         Author author = authorMapper.mapFrom(authorDto);
         Author savedEntity = authorService.createAuthor(author);
-        return authorMapper.mapTo(savedEntity);
+        return new ResponseEntity<>(authorMapper.mapTo(savedEntity), HttpStatus.CREATED);
     }
 }
