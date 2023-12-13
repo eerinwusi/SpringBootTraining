@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 public class BookController {
 
@@ -27,5 +30,11 @@ public class BookController {
         Book savedBook = bookService.createBook(book, isbn);
         BookDto savedDto = mapper.mapTo(savedBook);
         return new ResponseEntity<>(savedDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping(path = " /books")
+    public List<BookDto> listBooks() {
+        List<Book> books = bookService.findAll();
+        return books.stream().map(mapper::mapTo).collect(Collectors.toList());
     }
 }
