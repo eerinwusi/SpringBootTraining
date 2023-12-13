@@ -1,4 +1,4 @@
-package com.devtiro.quickstart.domain;
+package com.devtiro.quickstart.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

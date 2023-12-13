@@ -1,7 +1,7 @@
 package com.devtiro.quickstart;
 
-import com.devtiro.quickstart.domain.Author;
-import com.devtiro.quickstart.domain.Book;
+import com.devtiro.quickstart.domain.entities.Author;
+import com.devtiro.quickstart.domain.entities.Book;
 
 public final class TestDataUtil {
     private TestDataUtil() {

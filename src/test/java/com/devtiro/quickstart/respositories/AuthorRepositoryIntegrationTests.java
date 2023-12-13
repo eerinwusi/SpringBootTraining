@@ -1,7 +1,7 @@
 package com.devtiro.quickstart.respositories;
 
 import com.devtiro.quickstart.TestDataUtil;
-import com.devtiro.quickstart.domain.Author;
+import com.devtiro.quickstart.domain.entities.Author;
 import com.devtiro.quickstart.repositories.AuthorRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
