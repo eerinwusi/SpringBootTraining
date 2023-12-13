@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,21 +37,21 @@ public class AuthorRepositoryIntegrationTests {
         assertThat(result.get()).isEqualTo(author);
     }
 
-//    @Test
-//    public void testThatMultipleAuthorsCanBeCreatedAndRecalled() {
-//        Author authorA = TestDataUtil.createTestAuthorA();
-//        underTest.create(authorA);
-//        Author authorB = TestDataUtil.createTestAuthorB();
-//        underTest.create(authorB);
-//        Author authorC = TestDataUtil.createTestAuthorC();
-//        underTest.create(authorC);
-//
-//        List<Author> result = underTest.find();
-//        assertThat(result)
-//                .hasSize(2).
-//                containsExactly(authorA, authorB, authorC);
-//    }
-//
+    @Test
+    public void testThatMultipleAuthorsCanBeCreatedAndRecalled() {
+        Author authorA = TestDataUtil.createTestAuthorA();
+        underTest.save(authorA);
+        Author authorB = TestDataUtil.createTestAuthorB();
+        underTest.save(authorB);
+        Author authorC = TestDataUtil.createTestAuthorC();
+        underTest.save(authorC);
+
+        Iterable<Author> result = underTest.findAll();
+        assertThat(result)
+                .hasSize(3).
+                containsExactly(authorA, authorB, authorC);
+    }
+
 //    @Test
 //    public void testThatAuthorCanBeCreated() {
 //        Author authorA = TestDataUtil.createTestAuthorA();
