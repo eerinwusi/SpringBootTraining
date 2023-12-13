@@ -32,7 +32,7 @@ public class BookController {
         return new ResponseEntity<>(savedDto, HttpStatus.CREATED);
     }
 
-    @GetMapping(path = " /books")
+    @GetMapping(path = "/books")
     public List<BookDto> listBooks() {
         List<Book> books = bookService.findAll();
         return books.stream().map(mapper::mapTo).collect(Collectors.toList());
