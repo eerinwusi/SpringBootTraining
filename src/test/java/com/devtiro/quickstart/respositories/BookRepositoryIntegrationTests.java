@@ -1,48 +1,43 @@
-//package com.devtiro.quickstart.respositories;
-//
-//import com.devtiro.quickstart.TestDataUtil;
-//import com.devtiro.quickstart.dao.AuthorDao;
-//import com.devtiro.quickstart.domain.Author;
-//import com.devtiro.quickstart.domain.Book;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.test.annotation.DirtiesContext;
-//import org.springframework.test.context.junit.jupiter.SpringExtension;
-//
-//import java.util.List;
-//import java.util.Optional;
-//
-//import static org.assertj.core.api.Assertions.as;
-//import static org.assertj.core.api.Assertions.assertThat;
-//
-//@SpringBootTest
-//@ExtendWith(SpringExtension.class)
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-//public class BookDaoImplIntegrationTests {
-//
-//    private BookDaoImpl underTest;
-//
-//    private AuthorDao authorDao;
-//
-//    @Autowired
-//    public BookDaoImplIntegrationTests(BookDaoImpl underTest, AuthorDao authorDao) {
-//        this.underTest = underTest;
-//        this.authorDao = authorDao;
-//    }
-//
-//    @Test
-//    public void testThatBookCanBeCreatedAndRecalled() {
-//        Author author = TestDataUtil.createTestAuthorA();
-//        Book book = TestDataUtil.createTestBookA();
-//        book.setAuthorId(author.getId());
-//        underTest.create(book);
-//        Optional<Book> result = underTest.find("klasdkjhasdlfkjhkas");
-//        assertThat(result).isPresent();
-//        assertThat(result.get()).isEqualTo(book);
-//    }
-//
+package com.devtiro.quickstart.respositories;
+
+import com.devtiro.quickstart.TestDataUtil;
+import com.devtiro.quickstart.domain.Author;
+import com.devtiro.quickstart.domain.Book;
+import com.devtiro.quickstart.repositories.BookRepository;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+public class BookRepositoryIntegrationTests {
+
+    private BookRepository underTest;
+
+    @Autowired
+    public BookRepositoryIntegrationTests(BookRepository underTest) {
+        this.underTest = underTest;
+    }
+
+    @Test
+    public void testThatBookCanBeCreatedAndRecalled() {
+        Author author = TestDataUtil.createTestAuthorA();
+        Book book = TestDataUtil.createTestBookA(author);
+        underTest.save(book);
+        Optional<Book> result = underTest.findById(book.getIsbn());
+        assertThat(result).isPresent();
+        assertThat(result.get()).isEqualTo(book);
+    }
+
 //    @Test
 //    public void testThatMultipleBooksCanBeCreatedAndRecalled() {
 //        Author author = TestDataUtil.createTestAuthorA();
@@ -97,4 +92,4 @@
 //        Optional<Book> result = underTest.findOne(bookA.getIsbn());
 //        assertThat(result).isEmpty();
 //    }
-//}
+}
