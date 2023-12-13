@@ -57,22 +57,19 @@ public class BookRepositoryIntegrationTests {
 
     }
 //
-//    @Test
-//    public void testThatBookCanBeUpdated() {
-//        Author author = TestDataUtil.createTestAuthorA();
-//        authorDao.create(author);
-//
-//        Book bookA = TestDataUtil.createTestBookA();
-//        bookA.setAuthorId(author.getId());
-//
-//        bookA.setTitle("UPDATED");
-//        underTest.update(bookA.getIsbn(), bookA);
-//
-//        Optional<Book> result = underTest.findOne(bookA.getIsbn());
-//        assertThat(result).isPresent();
-//        assertThat(result.get()).isEqualTo(bookA);
-//
-//    }
+    @Test
+    public void testThatBookCanBeUpdated() {
+        Author author = TestDataUtil.createTestAuthorA();
+        Book bookA = TestDataUtil.createTestBookA(author);
+
+        bookA.setTitle("UPDATED");
+        underTest.save(bookA);
+
+        Optional<Book> result = underTest.findById(bookA.getIsbn());
+        assertThat(result).isPresent();
+        assertThat(result.get()).isEqualTo(bookA);
+
+    }
 //
 //    @Test
 //    public void testThatBookCanBeDeleted() {
