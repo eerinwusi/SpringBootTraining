@@ -37,7 +37,7 @@ public final class TestDataUtil {
     public static Book createTestBookA(Author author) {
         return Book.builder()
                 .isbn("978-1-2345-6789-0")
-                .title("The Shadow in the Attic")
+                .title("UPDATED")
                 .author(author)
                 .build();
     }
