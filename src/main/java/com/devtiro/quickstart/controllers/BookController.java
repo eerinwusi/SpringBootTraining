@@ -5,6 +5,7 @@ import com.devtiro.quickstart.domain.entities.Book;
 import com.devtiro.quickstart.mappers.Mapper;
 import com.devtiro.quickstart.mappers.impl.BookMapperImpl;
 import com.devtiro.quickstart.services.BookService;
+import com.sun.net.httpserver.HttpsServer;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,5 +64,11 @@ public class BookController {
         Book book = mapper.mapFrom(bookDto);
         Book updatedBook = bookService.partialUpdate(isbn, book);
         return new ResponseEntity<>(mapper.mapTo(updatedBook), HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/books/{isbn}")
+    public ResponseEntity deleteBook(@PathVariable("isbn") String isbn) {
+        bookService.delete(isbn);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }
