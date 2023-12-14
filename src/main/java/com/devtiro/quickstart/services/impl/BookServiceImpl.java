@@ -1,6 +1,4 @@
 package com.devtiro.quickstart.services.impl;
-
-import com.devtiro.quickstart.domain.dto.BookDto;
 import com.devtiro.quickstart.domain.entities.Book;
 import com.devtiro.quickstart.repositories.BookRepository;
 import com.devtiro.quickstart.services.BookService;
@@ -21,7 +19,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book createBook(Book book, String isbn) {
+    public Book createUpdateBook(Book book, String isbn) {
         book.setIsbn(isbn);
         return bookRepository.save(book);
     }
@@ -34,5 +32,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public Optional<Book> findOne(String isbn) {
         return bookRepository.findById(isbn);
+    }
+
+    @Override
+    public boolean isExists(String isbn) {
+        return bookRepository.existsById(isbn);
     }
 }
