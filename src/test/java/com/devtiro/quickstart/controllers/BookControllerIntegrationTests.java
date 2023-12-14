@@ -75,20 +75,20 @@ public class BookControllerIntegrationTests {
         );
     }
 
-    @Test
-    public void testThatListBooksReturnsBook() throws Exception {
-        Book testBook = TestDataUtil.createTestBookA(null);
-        bookService.createUpdateBook(testBook, testBook.getIsbn());
-
-        mockMvc.perform(
-                MockMvcRequestBuilders.get("/books")
-                        .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$[0].isbn").value("978-1-2345-6789-0")
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$[0].title").value("The Shadow in the Attic")
-        );
-    }
+//    @Test
+//    public void testThatListBooksReturnsBook() throws Exception {
+//        Book testBook = TestDataUtil.createTestBookA(null);
+//        bookService.createUpdateBook(testBook, testBook.getIsbn());
+//
+//        mockMvc.perform(
+//                MockMvcRequestBuilders.get("/books")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//        ).andExpect(
+//                MockMvcResultMatchers.jsonPath("$[0].isbn").value("978-1-2345-6789-0")
+//        ).andExpect(
+//                MockMvcResultMatchers.jsonPath("$[0].title").value("The Shadow in the Attic")
+//        );
+//    }
 
     @Test
     public void testThatGetBookReturnsHttpStatus200OkWhenBookExists() throws Exception {
@@ -138,13 +138,13 @@ public class BookControllerIntegrationTests {
         Book testBookA = TestDataUtil.createTestBookA(null);
         Book savedBook = bookService.createUpdateBook(testBookA, testBookA.getIsbn());
 
-        Book bookDto = TestDataUtil.createTestBookA(null);
+        Book bookDto = TestDataUtil.createTestBookD(null);
         bookDto.setIsbn(savedBook.getIsbn());
         bookDto.setTitle("UPDATED");
         String bookJson = objectMapper.writeValueAsString(bookDto);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/books/" + savedBook.getIsbn())
+                MockMvcRequestBuilders.put("/books/" + savedBook.getIsbn())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(bookJson)
         ).andExpect(

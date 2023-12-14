@@ -42,14 +42,6 @@ public final class TestDataUtil {
                 .build();
     }
 
-//    public static BookDto createTestBooDtoA(final AuthorDto author) {
-//        return Book.builder()
-//                .isbn("978-1-2345-6789-0")
-//                .title("The Shadow in the Attic")
-//                .author(author)
-//                .build();
-//    }
-
     public static Book createTestBookB(Author author) {
         return Book.builder()
                 .isbn("978-1-2345-6789-1")
@@ -62,6 +54,14 @@ public final class TestDataUtil {
         return Book.builder()
                 .isbn("978-1-2345-6789-2")
                 .title("The Last Ember")
+                .author(author)
+                .build();
+    }
+
+    public static Book createTestBookD(Author author) {
+        return Book.builder()
+                .isbn("978-1-2345-6789-0")
+                .title("UPDATED")
                 .author(author)
                 .build();
     }
